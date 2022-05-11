@@ -17,7 +17,9 @@ public class Contacts2 extends Contacts {
         this.parser.load(file);
     }
 
-    public List<String> getNamesBySorting() {
+    public List<String> getNamesBySorting() throws Exception {
+        this.parser.init();
+
         try(Parser myParser = this.parser){
             Map<String, Integer> names = new HashMap<>();
             Contact contact;
