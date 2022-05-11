@@ -4,7 +4,7 @@ import com.nhnent.service.model.Contact;
 
 import java.io.*;
 
-public class CsvParser implements Parser<String>{
+public class CsvParser implements Parser{
     File file;
     BufferedReader bufferedReader;
 

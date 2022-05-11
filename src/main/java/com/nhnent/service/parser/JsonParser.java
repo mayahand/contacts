@@ -11,7 +11,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.Iterator;
 
-public class JsonParser implements Parser<JSONObject>{
+public class JsonParser implements Parser{
     File file;
     Iterator<JSONObject> contacts;
 
