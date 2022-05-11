@@ -19,10 +19,10 @@ public class Contacts {
         parser.load(new File("src/test/resources/" + s));
     }
 
-    public int getUniqueNameCount() throws Exception {
-        parser.init();
-        Set<String> names = new HashSet<>();
+    public int getUniqueNameCount() {
         try(Parser myParser = this.parser){
+            myParser.init();
+            Set<String> names = new HashSet<>();
             Contact contact;
             while((contact = myParser.getNextContact()) != null){
                 names.add(contact.name);
@@ -34,13 +34,13 @@ public class Contacts {
         return 0;
     }
 
-    public List<String> findByName(String name) throws Exception {
-        parser.init();
-        List<String> phoneNumbers = new ArrayList<>();
-
-        if(name == null) return phoneNumbers;
-
+    public List<String> findByName(String name) {
         try(Parser myParser = this.parser){
+            myParser.init();
+            List<String> phoneNumbers = new ArrayList<>();
+
+            if(name == null) return phoneNumbers;
+
             Contact contact;
             while((contact = myParser.getNextContact()) != null){
                 if(name.equals(contact.name)){
@@ -49,9 +49,8 @@ public class Contacts {
             }
         }catch (Exception e){
             e.printStackTrace();
-            phoneNumbers.clear();
         }
 
-        return phoneNumbers;
+        return new ArrayList<>();
     }
 }

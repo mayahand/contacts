@@ -3,24 +3,20 @@ package com.nhnent.service;
 import com.nhnent.service.model.Contact;
 import com.nhnent.service.parser.Parser;
 
-import java.io.File;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class Contacts2 extends Contacts {
 
-    File file;
-
-    public void load(String s, Parser parser) throws Exception {
-        file = new File("src/test/resources/" + s);
-        this.parser = parser;
-        this.parser.load(file);
+    public void load(String s, Parser p) throws Exception {
+        parser = p;
+        super.load(s);
     }
 
-    public List<String> getNamesBySorting() throws Exception {
-        this.parser.init();
-
+    public List<String> getNamesBySorting() {
         try(Parser myParser = this.parser){
+            myParser.init();
+
             Map<String, Integer> names = new HashMap<>();
             Contact contact;
             while((contact = myParser.getNextContact()) != null){
@@ -39,7 +35,7 @@ public class Contacts2 extends Contacts {
                     return o1.getKey().compareTo(o2.getKey());
                 }
                 return comp;
-            }).map(item -> item.getKey()).collect(Collectors.toList());
+            }).map(Map.Entry::getKey).collect(Collectors.toList());
             Collections.reverse(list);
             return list;
         }catch (Exception e){
